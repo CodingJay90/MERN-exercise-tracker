@@ -10,8 +10,12 @@ const port = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json())
 
+if(process.env.NODE_ENV === 'production') {
+  app.use(express.static("Exercise-tracker/build"))
+}
+
 mongoose
-  .connect("mongodb://localhost/exercise_tracker", { useNewUrlParser: true })
+  .connect(process.env.MONGODB_URI || "mongodb://localhost/exercise_tracker", { useNewUrlParser: true })
   .then(console.log("database connected successfully"));
 
 const exerciseRouter = require('./routes/exercises')
