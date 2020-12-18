@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const mongoose = require('mongoose')
+const path = require('path')
 
 // require("dotenv/types").config();
 
@@ -12,6 +13,10 @@ app.use(express.json())
 
 if(process.env.NODE_ENV === 'production') {
   app.use(express.static("./Exercise-tracker/build"))
+
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, './Exercise-tracker', 'build', 'index.html'))
+  })
 }
 
 mongoose
