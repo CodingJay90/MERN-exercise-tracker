@@ -2,7 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const mongoose = require('mongoose')
 
-require("dotenv").config();
+// require("dotenv/types").config();
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -18,8 +18,8 @@ mongoose
   .connect(process.env.MONGODB_URI || "mongodb://localhost/exercise_tracker", { useNewUrlParser: true })
   .then(console.log("database connected successfully"));
 
-const exerciseRouter = require('./routes/exercises')
-const usersRouter = require('./routes/users')
+const exerciseRouter = require('./backend/routes/exercises')
+const usersRouter = require('./backend/routes/users')
 
 app.use('/exercises', exerciseRouter)
 app.use('/users', usersRouter)
